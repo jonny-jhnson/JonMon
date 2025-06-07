@@ -39,7 +39,7 @@ FilterPostCallback
     UNREFERENCED_PARAMETER(CompletionContext);
 
     HANDLE sourceThreadId = PsGetThreadId(Data->Thread);
-    HANDLE currentProcessId = PsGetCurrentProcessId();
+    ULONG currentProcessId = FltGetRequestorProcessId(Data);
     ULONGLONG sourceProcStartKey = PsGetProcessStartKey(PsGetCurrentProcess());
     FILETIME filetime;
     NTSTATUS status;
@@ -50,7 +50,7 @@ FilterPostCallback
 		goto Exit;
 	}
 
-    if (currentProcessId == (HANDLE)4) {
+    if (currentProcessId == 4) {
 		goto Exit;
 	}
 
